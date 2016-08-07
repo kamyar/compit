@@ -9,9 +9,11 @@ sys.path.append( path.dirname( path.dirname( path.abspath(__file__))))
 import github3
 
 from tmp.tokens import GITHUB_TOKEN
+import exceptions
+
+
 
 github = github3.login(token=GITHUB_TOKEN)
-
 
 class RepoInfo:
     def __init__(self, user=None, repo=None, url=None):
@@ -43,12 +45,16 @@ class RepoInfo:
 
 
     def _get_repo_obj(self, user, repo):
-        if user and repo:
-            repo_obj = github.repository(user, repo)
-            if repo_obj:
-                return repo_obj
-        return  None
-
+        if not user:
+            raise exceptions.URLInvalid("Could not decode user")
+        if not repo:
+            raise exceptions.URLInvalid("Could not decode repository")
+        
+        repo_obj = github.repository(user, repo)
+        if not repo_obj:
+            raise exceptions.RepositoryNotValid("Could not retrieve repository")
+            
+        return repo_obj
 
 
 
