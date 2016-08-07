@@ -64,3 +64,9 @@ target/
 
 # Ignore Tokens and other private data
 tokens.py
+
+# Sublime Project Files
+*.sublime-*
+
+# tmp files
+tmp/
