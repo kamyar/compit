@@ -1,4 +1,5 @@
 from repoinfo import RepoInfo
 
 
-RepoInfo("https://github.com/gorilla/http")
+r = RepoInfo(url="https://github.com/gorilla/http")
+print(r)
